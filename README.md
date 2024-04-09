@@ -1,47 +1,36 @@
 ## Overview
 
-This Python script is designed to automate the process of finding the primary web domain of brands listed in a CSV file. It leverages the capabilities of Google Search through a third-party API and utilizes OpenAI's GPT model for intelligent text analysis and URL extraction. The script reads brand names from a CSV, performs web searches to gather relevant information, and uses a trained model to identify and extract the exact domain name for each brand.
+This Node.js script is designed to search for brand URLs given only their names. It utilizes the Google Search API and OpenAI's GPT to find the most accurate URL associated with a brand name. The script reads brand names from a CSV file, searches for each brand's official website, and then appends the results to a new CSV file, making it a useful tool for marketing, research, and data enrichment tasks.
 
 ## Features
 
-- **Automated Google Search**: Uses a third-party Google Search API to fetch search results related to brand names listed in a CSV file.
-- **Intelligent Domain Extraction**: Employs OpenAI's GPT model to analyze search results and extract the precise domain name for each brand.
-- **CSV File Processing**: Reads brand names from a CSV file and appends the extracted domain names to a new column, updating the original file.
-- **Rate Limiting**: Incorporates a delay between API requests to avoid exceeding rate limits and ensure compliance with API usage policies.
-- **Social Media Filter**: Specifically designed to ignore social media links, focusing solely on the brand's primary web domain.
+- **CSV Input**: Reads a list of brand names from a CSV file.
+- **Google Search API Integration**: Utilizes the Google Search API to find web pages associated with each brand.
+- **OpenAI's GPT for Domain Extraction**: Leverages OpenAI's GPT to intelligently extract the main domain/URL for each brand from the search results.
+- **CSV Output**: Outputs the results into a new CSV file, including the brand name and its associated domain.
+- **Real-time Processing Feedback**: Provides console feedback on the processing status of each brand.
 
 ## How It Works
 
-1. **Initialization**: Set up by specifying your OpenAI and RapidAPI keys within the script.
-2. **Input CSV File**: The script expects a CSV file named `brands.csv` with at least one column named 'Brand', listing brand names for which domains are to be found.
-3. **Search and Analysis**: For each brand, the script fetches search results using the Google Search API, then analyzes these results with OpenAI's GPT to find the most likely web domain.
-4. **CSV File Update**: Extracted domains are added to a new column in the CSV file named 'Domains', updating each brand's entry with its identified domain.
-5. **Output**: The original CSV file is updated to include the domains, facilitating easy access to the extracted data.
+1. **Preparation**: The script starts by checking the existence of an output CSV file and creates one if it doesn't exist.
+2. **Reading CSV**: It reads brand names from the specified CSV file, expecting a column named 'Brands'.
+3. **Performing Searches**: For each brand, it performs a Google search to find associated web pages.
+4. **Extracting URLs**: Using OpenAI's GPT, it processes the search results to extract the most relevant URL for each brand.
+5. **Writing Results**: Each brand and its extracted URL are appended to the output CSV file.
+6. **Completion**: Upon processing all brands, the script outputs the total processing time in the console.
 
 ## Usage
 
-1. **Prerequisites**: Ensure you have Python installed on your system, along with the `requests`, `csv`, and `openai` libraries.
-2. **API Keys**: Obtain your API keys from OpenAI (https://platform.openai.com/api-keys) and RapidAPI Google Search Result API (https://rapidapi.com/rphrp1985/api/google-api31) and insert them into the script in place of `YOUR_OPENAI_KEY_HERE` and `YOUR_RAPIDAPI_KEY_HERE`.
-3. **CSV File Preparation**: Prepare your `brands.csv` file with brand names listed under the 'Brand' column.
-4. **Script Execution**: Run the script with Python to begin the domain extraction process.
+Before running the script, ensure you have Node.js installed and the required packages (`fs`, `axios`, `openai`, `csv-parser`) available in your project. You will also need valid API keys for both the Google Search API and OpenAI.
 
-### Example Command
+1. Prepare a CSV file named `brands.csv` with a single column named 'Brands', listing all the brands you wish to find URLs for.
+2. Set your OpenAI and Google Search API keys in the script's constants.
+3. Run the script with Node.js:
 
-```sh
-python domain_extractor.py
+```bash
+node '.\Domain Finder.js'
 ```
 
-## Customization
+4. Check the output CSV file named `results-[current_date_time].csv` for the brands and their associated URLs.
 
-- **CSV File Path**: Modify `CSV_FILE_PATH` to point to a different input file if needed.
-- **Delay Configuration**: Adjust the `time.sleep(1)` value to change the delay between API requests based on the rate limit of the APIs you're using.
-- **API Endpoint and Headers**: Update the Google Search API endpoint and headers if you switch to a different API provider or if API requirements change.
-
-## Ethical Use and Compliance
-
-- **Rate Limits**: Adhere to the rate limits imposed by the APIs to avoid service disruptions.
-- **Data Usage**: Ensure that the use of scraped domain data complies with legal regulations and respects privacy considerations.
-
-## Disclaimer
-
-This script is provided for educational and development purposes. Users are responsible for using the tool ethically and in accordance with the terms of service of the APIs and data sources involved.
+Note: The script outputs real-time processing status in the console, including any errors encountered during the search or domain extraction process.

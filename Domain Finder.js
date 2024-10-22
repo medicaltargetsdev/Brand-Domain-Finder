@@ -20,8 +20,8 @@ Requirements: A CSV file with data in a column named 'Brands'
 `
 
 // Constants
-const OPENAI_API_KEY = 'YOUR-OPENAI_API_KEY';
-const RAPIDAPI_KEY = 'YOUR-RAPIDAPI_KEY';
+const OPENAI_API_KEY = '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';
+const RAPIDAPI_KEY = '0f637bc138msh4cccf9d0f29294bp1f4b97jsn8d241b45e9c5';
 const CSV_FILE_PATH = 'brands.csv';
 const outputFilePath = `results-${month}-${day}-${hour}-${minutes}.csv`;
 const fileExists = fs.existsSync(outputFilePath);
